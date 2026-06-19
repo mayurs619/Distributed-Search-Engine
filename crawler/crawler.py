@@ -10,12 +10,15 @@ import redis
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 import json
+import os
 
 class DistributedCrawler:
     def __init__(self, seed_urls, max_depth=2, redis_host='localhost', redis_port=6379):
         self.seed_urls = seed_urls
         self.max_depth = max_depth
-        self.r = redis.from_url("rediss://default:gQAAAAAAAk8JAAIgcDE4MjhiODlmYWQ2MGQ0N2MyYTMwYzAyOWVhNzM0ZTM1Yw@flying-woodcock-151305.upstash.io:6379", decode_responses=True)
+        redis_url = os.getenv("UPSTASH_REDIS_URL", "redis://localhost:6379")
+        
+        self.r = redis.from_url(redis_url, decode_responses=True)
         self.REDIS_QUEUE_KEY = "search_engine:url_queue"
         self.REDIS_VISITED_KEY = "search_engine:visited_urls"
 
