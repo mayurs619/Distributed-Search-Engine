@@ -22,7 +22,8 @@ export default function Home() {
     setHasSearched(true);
 
     try {
-      const res = await fetch(`http://localhost:8080/api/documents/search?q=${encodeURIComponent(query)}`);
+      const BASE_URL = "https://distributed-search-engine.onrender.com";
+      const res = await fetch(`${BASE_URL}/api/documents/search?q=${encodeURIComponent(query)}`);
       const data = await res.json();
       setResults(data);
     } catch (error) {
