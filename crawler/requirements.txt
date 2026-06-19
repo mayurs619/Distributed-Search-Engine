@@ -1,0 +1,4 @@
+aiohttp==3.9.3
+beautifulsoup4==4.12.3
+redis==5.0.1
+psycopg2-binary==2.9.9
